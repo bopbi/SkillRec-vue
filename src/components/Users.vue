@@ -20,7 +20,7 @@ export default {
     };
   },
   created() {
-    this.$http.get('http://localhost:5000/api/users').then((response) => {
+    this.$http.get('api/users').then((response) => {
       this.users = response.data;
     });
   },
