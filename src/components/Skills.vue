@@ -2,9 +2,9 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <ul class="users-list">
-      <li v-for="user in users"
-        class="user" :key="user.id">
-        <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">{{ user.name }}</router-link>
+      <li v-for="skill in skills"
+        class="user" :key="skill.id">
+        <router-link :to="{ name: 'SkillDetail', params: { id: skill.id }}">{{ skill.name }}</router-link>
       </li>
     </ul>
   </div>
@@ -12,16 +12,16 @@
 
 <script>
 export default {
-  name: 'Users',
+  name: 'Skills',
   data() {
     return {
-      msg: 'User List',
-      users: [],
+      msg: 'Skill List',
+      skills: [],
     };
   },
   created() {
-    this.$http.get('api/users').then((response) => {
-      this.users = response.data;
+    this.$http.get('api/skills').then((response) => {
+      this.skills = response.data;
     });
   },
 };

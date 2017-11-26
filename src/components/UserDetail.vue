@@ -1,27 +1,22 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <ul class="users-list">
-      <li v-for="user in users"
-        class="user" :key="user.id">
-        <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">{{ user.name }}</router-link>
-      </li>
-    </ul>
+    <h1>{{ user.name }}</h1>
+    <p>{{ user.email }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Users',
+  props: ['id'],
+  name: 'UserDetail',
   data() {
     return {
-      msg: 'User List',
-      users: [],
+      user: {},
     };
   },
   created() {
-    this.$http.get('api/users').then((response) => {
-      this.users = response.data;
+    this.$http.get(`api/users/${this.id}`).then((response) => {
+      this.user = response.data;
     });
   },
 };

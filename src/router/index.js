@@ -3,6 +3,9 @@ import VueResource from 'vue-resource';
 import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
 import Users from '@/components/Users';
+import UserDetail from '@/components/UserDetail';
+import Skills from '@/components/Skills';
+import SkillDetail from '@/components/SkillDetail';
 
 Vue.use(Router);
 Vue.use(VueResource);
@@ -19,6 +22,28 @@ export default new Router({
       path: '/',
       name: 'Users',
       component: Users,
+    },
+    {
+      path: '/users',
+      name: 'Users',
+      component: Users,
+    },
+    {
+      path: '/users/:id',
+      name: 'UserDetail',
+      component: UserDetail,
+      props: true,
+    },
+    {
+      path: '/skills',
+      name: 'Skills',
+      component: Skills,
+    },
+    {
+      path: '/skills/:id',
+      name: 'SkillDetail',
+      component: SkillDetail,
+      props: true,
     },
   ],
 });
