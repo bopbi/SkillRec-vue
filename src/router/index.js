@@ -9,7 +9,9 @@ import SkillDetail from '@/components/SkillDetail';
 
 Vue.use(Router);
 Vue.use(VueResource);
-Vue.http.options.root = process.env.BACK_END;
+if (process.env.NODE_ENV === 'development') {
+  Vue.http.options.root = process.env.BACK_END;
+}
 
 export default new Router({
   routes: [
@@ -20,7 +22,7 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'Users',
+      name: 'Home',
       component: Users,
     },
     {

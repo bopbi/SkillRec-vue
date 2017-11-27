@@ -2,6 +2,13 @@
   <div class="hello">
     <h1>{{ user.name }}</h1>
     <p>{{ user.email }}</p>
+    <h3>Skills</h3>
+    <ul class="skills-list">
+      <li v-for="skill in skills"
+        class="skill" :key="skill.id">
+        <router-link :to="{ name: 'SkillDetail', params: { id: skill.id }}">{{ skill.name }}</router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -12,12 +19,24 @@ export default {
   data() {
     return {
       user: {},
+      skills: [],
     };
   },
+  methods: {
+    getUserDetail() {
+      this.$http.get(`api/users/${this.id}`).then((response) => {
+        this.user = response.data;
+      });
+    },
+    getSkillForUser() {
+      this.$http.get(`api/users/${this.id}/skills`).then((response) => {
+        this.skills = response.data;
+      });
+    },
+  },
   created() {
-    this.$http.get(`api/users/${this.id}`).then((response) => {
-      this.user = response.data;
-    });
+    this.getUserDetail();
+    this.getSkillForUser();
   },
 };
 </script>

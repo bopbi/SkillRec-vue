@@ -1,6 +1,12 @@
 <template>
   <div class="hello">
     <h1>{{ skill.name }}</h1>
+    <ul class="users-list">
+      <li v-for="user in users"
+        class="user" :key="user.id">
+        <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">{{ user.name }}</router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -8,15 +14,27 @@
 export default {
   props: ['id'],
   name: 'SkillDetail',
+  methods: {
+    getSkillDetail() {
+      this.$http.get(`api/skills/${this.id}`).then((response) => {
+        this.skill = response.data;
+      });
+    },
+    getUserForSkill() {
+      this.$http.get(`api/skills/${this.id}/users`).then((response) => {
+        this.users = response.data;
+      });
+    },
+  },
   data() {
     return {
       skill: {},
+      users: [],
     };
   },
   created() {
-    this.$http.get(`api/skills/${this.id}`).then((response) => {
-      this.skill = response.data;
-    });
+    this.getSkillDetail();
+    this.getUserForSkill();
   },
 };
 </script>
