@@ -2,11 +2,20 @@
   <div class="hello">
     <h1>{{ user.name }}</h1>
     <p>{{ user.email }}</p>
+    <hr />
     <h3>Skills</h3>
     <ul class="skills-list">
-      <li v-for="skill in skills"
-        class="skill" :key="skill.id">
-        <router-link :to="{ name: 'SkillDetail', params: { id: skill.id }}">{{ skill.name }}</router-link>
+      <li v-for="skillRecommender in skillRecommenders" class="skills" :key="skillRecommender.skill.id">
+        <div>
+          <router-link :to="{ name: 'SkillDetail', params: { id: skillRecommender.skill.id }}">{{ skillRecommender.skill.name }}</router-link>
+        </div>
+        <div>
+          <ul class="recommenders-list">
+            <li v-for="user in skillRecommender.recommenders" class="recommenders" :key="user.id">
+              <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">* {{ user.name }}</router-link>
+            </li>
+          </ul>
+        </div>
       </li>
     </ul>
   </div>
@@ -19,7 +28,7 @@ export default {
   data() {
     return {
       user: {},
-      skills: [],
+      skillRecommenders: [],
     };
   },
   methods: {
@@ -28,15 +37,15 @@ export default {
         this.user = response.data;
       });
     },
-    getSkillForUser() {
-      this.$http.get(`api/users/${this.id}/skills`).then((response) => {
-        this.skills = response.data;
+    getSkillRecommenderForUser() {
+      this.$http.get(`api/users/${this.id}/recommenders`).then((response) => {
+        this.skillRecommenders = response.data;
       });
     },
   },
   created() {
     this.getUserDetail();
-    this.getSkillForUser();
+    this.getSkillRecommenderForUser();
   },
 };
 </script>
@@ -50,7 +59,7 @@ ul {
   list-style-type: none;
   padding: 0;
 }
-li {
+li.recommenders {
   display: inline-block;
   margin: 0 10px;
 }

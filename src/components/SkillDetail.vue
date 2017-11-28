@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ skill.name }}</h1>
+    <hr />
+    <h3>User with skill:</h3>
     <ul class="users-list">
       <li v-for="user in users"
         class="user" :key="user.id">
