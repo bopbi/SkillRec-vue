@@ -1,23 +1,24 @@
 <template>
-  <div class="hello">
-    <h1>{{ user.name }}</h1>
-    <p>{{ user.email }}</p>
-    <hr />
-    <h3>Skills</h3>
-    <ul class="skills-list">
-      <li v-for="skillRecommender in skillRecommenders" class="skills" :key="skillRecommender.skill.id">
-        <div>
-          <router-link :to="{ name: 'SkillDetail', params: { id: skillRecommender.skill.id }}">{{ skillRecommender.skill.name }}</router-link>
+  <div class="container">
+    <div class="row">
+      <div class="column">
+        <h1>{{ user.name }}</h1>
+        <p>{{ user.email }}</p>
+        <hr />
+        <h2>Skills</h2>
+        <div v-for="skillRecommender in skillRecommenders" class="skills" :key="skillRecommender.skill.id">
+          <router-link :to="{ name: 'SkillDetail', params: { id: skillRecommender.skill.id }}">{{ skillRecommender.skill.name }} ({{ skillRecommender.recommenders.length }})</router-link>
+          <button>Promote</button>
+          <div>
+            <ul class="recommenders-list">
+              <li v-for="user in skillRecommender.recommenders" class="recommenders" :key="user.id">
+                <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">* {{ user.name }}</router-link>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <ul class="recommenders-list">
-            <li v-for="user in skillRecommender.recommenders" class="recommenders" :key="user.id">
-              <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">* {{ user.name }}</router-link>
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -42,12 +43,20 @@ export default {
         this.skillRecommenders = response.data;
       });
     },
+    getDetail() {
+      this.getUserDetail();
+      this.getSkillRecommenderForUser();
+    },
+  },
+  watch: {
+    // call again the method if the route changes
+    $route: 'getDetail',
   },
   created() {
-    this.getUserDetail();
-    this.getSkillRecommenderForUser();
+    this.getDetail();
   },
 };
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
