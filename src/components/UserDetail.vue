@@ -4,19 +4,37 @@
       <div class="column">
         <h1>{{ user.name }}</h1>
         <p>{{ user.email }}</p>
-        <hr />
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
         <h2>Skills</h2>
-        <div v-for="skillRecommender in skillRecommenders" class="skills" :key="skillRecommender.skill.id">
-          <router-link :to="{ name: 'SkillDetail', params: { id: skillRecommender.skill.id }}">{{ skillRecommender.skill.name }} ({{ skillRecommender.recommenders.length }})</router-link>
-          <button>Promote</button>
-          <div>
-            <ul class="recommenders-list">
-              <li v-for="user in skillRecommender.recommenders" class="recommenders" :key="user.id">
-                <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">* {{ user.name }}</router-link>
-              </li>
-            </ul>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div class="row" v-for="skillRecommender in skillRecommenders" :key="skillRecommender.skill.id">
+      <div class="column">
+        <h3 v-if=" skillRecommender.recommenders.length > 0">
+          <router-link :to="{ name: 'SkillDetail', params: { id: skillRecommender.skill.id }}">
+            {{ skillRecommender.recommenders.length }} - {{ skillRecommender.skill.name }}
+          </router-link> 
+        </h3>
+        <h3 v-if=" skillRecommender.recommenders.length == 0">
+          <router-link :to="{ name: 'SkillDetail', params: { id: skillRecommender.skill.id }}">
+            {{ skillRecommender.skill.name }}
+          </router-link> 
+        </h3>
+        <button>Promote</button>
+      </div>
+      <div class="column column-75">
+          <ul class="recommenders-list">
+            <li v-for="user in skillRecommender.recommenders" class="recommenders" :key="user.id">
+              <h4>
+              <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">
+                {{ user.name }}
+              </router-link>
+              </h4>
+            </li>
+          </ul>
       </div>
     </div>
   </div>

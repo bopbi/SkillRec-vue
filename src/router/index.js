@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 import Router from 'vue-router';
-import HelloWorld from '@/components/HelloWorld';
 import Users from '@/components/Users';
 import UserDetail from '@/components/UserDetail';
 import Skills from '@/components/Skills';
@@ -15,11 +14,6 @@ if (process.env.NODE_ENV === 'development') {
 
 export default new Router({
   routes: [
-    {
-      path: '/hello',
-      name: 'HelloWorld',
-      component: HelloWorld,
-    },
     {
       path: '/',
       name: 'Home',

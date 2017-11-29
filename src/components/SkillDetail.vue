@@ -1,14 +1,18 @@
 <template>
-  <div class="hello">
-    <h1>{{ skill.name }}</h1>
-    <hr />
-    <h3>User with skill:</h3>
-    <ul class="users-list">
-      <li v-for="user in users"
-        class="user" :key="user.id">
-        <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">{{ user.name }}</router-link>
-      </li>
-    </ul>
+  <div class="container">
+    <div class="row">
+      <div class="column">
+        <h1>{{ skill.name }}</h1>
+        <hr />
+        <h3>User with {{ skill.name }} skill:</h3>
+        <ul class="users-list">
+          <li v-for="user in users"
+            class="user" :key="user.id">
+            <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">{{ user.name }}</router-link>
+          </li>
+        </ul>    
+      </div>
+    </div>
   </div>
 </template>
 
