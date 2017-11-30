@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="columns">
       <div class="column">
-        <h1>{{ skill.name }}</h1>
+        <h1 class="title is-1">{{ skill.name }}</h1>
         <hr />
         <h3>User with {{ skill.name }} skill:</h3>
-        <ul class="users-list">
+        <ul class="users-list subtitle is-3">
           <li v-for="user in users"
-            class="user" :key="user.id">
+            class="user subtitle is-4" :key="user.id">
             <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">{{ user.name }}</router-link>
           </li>
         </ul>    

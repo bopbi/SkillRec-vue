@@ -1,11 +1,16 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="columns">
       <div class="column">
-        <h1>{{ msg }}</h1>
+        <app-nav />
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <h1 class="title is-1">{{ msg }}</h1>
         <ul class="users-list">
           <li v-for="user in users"
-            class="user" :key="user.id">
+            class="user subtitle is-3" :key="user.id">
             <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">{{ user.name }}</router-link>
           </li>
         </ul>    

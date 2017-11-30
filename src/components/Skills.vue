@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="columns">
       <div class="column">
-        <h1>{{ msg }}</h1>
+        <h1 class="title is-1">{{ msg }}</h1>
         <ul class="users-list">
           <li v-for="skill in skills"
             class="user" :key="skill.id">

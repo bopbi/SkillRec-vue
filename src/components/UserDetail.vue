@@ -1,38 +1,40 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="columns">
       <div class="column">
-        <h1>{{ user.name }}</h1>
-        <p>{{ user.email }}</p>
+        <h1 class="title is-1">{{ user.name }}</h1>
+        <p class="subtitle is-5">{{ user.email }}</p>
       </div>
     </div>
-    <div class="row">
+    <hr />
+    <div class="columns">
       <div class="column">
-        <h2>Skills</h2>
+        <h2 class="subtitle is-2">Skills</h2>
       </div>
     </div>
-    <div class="row" v-for="skillRecommender in skillRecommenders" :key="skillRecommender.skill.id">
-      <div class="column">
-        <h3 v-if=" skillRecommender.recommenders.length > 0">
+    <div class="columns" v-for="skillRecommender in skillRecommenders" :key="skillRecommender.skill.id">
+      <div class="column is-2">
+        <h3 v-if=" skillRecommender.recommenders.length > 0" class="subtitle is-3">
+          <button class="button is-primary">+</button>
           <router-link :to="{ name: 'SkillDetail', params: { id: skillRecommender.skill.id }}">
-            {{ skillRecommender.recommenders.length }} - {{ skillRecommender.skill.name }}
+             {{ skillRecommender.skill.name }} ({{ skillRecommender.recommenders.length }})
           </router-link> 
         </h3>
-        <h3 v-if=" skillRecommender.recommenders.length == 0">
+        <h3 v-if=" skillRecommender.recommenders.length == 0" class="subtitle is-3">
+          <button class="button is-primary">+</button>
           <router-link :to="{ name: 'SkillDetail', params: { id: skillRecommender.skill.id }}">
             {{ skillRecommender.skill.name }}
           </router-link> 
         </h3>
-        <button>Promote</button>
       </div>
-      <div class="column column-75">
+      <div class="column">
           <ul class="recommenders-list">
             <li v-for="user in skillRecommender.recommenders" class="recommenders" :key="user.id">
-              <h4>
+              <p class="subtitle is-4">
               <router-link :to="{ name: 'UserDetail', params: { id: user.id }}">
                 {{ user.name }}
               </router-link>
-              </h4>
+              </p>
             </li>
           </ul>
       </div>
