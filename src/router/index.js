@@ -5,6 +5,7 @@ import Users from '@/components/Users';
 import UserDetail from '@/components/UserDetail';
 import Skills from '@/components/Skills';
 import SkillDetail from '@/components/SkillDetail';
+import Login from '@/components/Login';
 
 Vue.use(Router);
 Vue.use(VueResource);
@@ -40,6 +41,11 @@ export default new Router({
       name: 'SkillDetail',
       component: SkillDetail,
       props: true,
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
     },
   ],
 });

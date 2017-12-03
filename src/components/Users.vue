@@ -2,11 +2,6 @@
   <div class="container">
     <div class="columns">
       <div class="column">
-        <app-nav />
-      </div>
-    </div>
-    <div class="columns">
-      <div class="column">
         <h1 class="title is-1">{{ msg }}</h1>
         <ul class="users-list">
           <li v-for="user in users"
