@@ -2,20 +2,21 @@
   <div class="container">
     <div class="columns">
       <div class="column">
-        <h1 class="title is-1">{{ user.name }}</h1>
+        <br />
+        <h1 class="title is-3">{{ user.name }}</h1>
         <p class="subtitle is-5">{{ user.email }}</p>
       </div>
     </div>
     <hr />
     <div class="columns">
       <div class="column">
-        <h2 class="subtitle is-2">Skills</h2>
+        <h2 class="subtitle is-3">Skills</h2>
       </div>
     </div>
     <div class="columns" v-for="skillRecommender in skillRecommenders" :key="skillRecommender.skill.id">
-      <div class="column is-2">
+      <div class="column is-3">
         <h3 v-if=" skillRecommender.recommenders.length > 0" class="subtitle is-3">
-          <button class="button is-primary">+</button>
+          <button class="button is-primary is-3" @click="recommend(skillRecommender.skill)">+</button>
           <router-link :to="{ name: 'SkillDetail', params: { id: skillRecommender.skill.id }}">
              {{ skillRecommender.skill.name }} ({{ skillRecommender.recommenders.length }})
           </router-link> 
@@ -66,6 +67,17 @@ export default {
     getDetail() {
       this.getUserDetail();
       this.getSkillRecommenderForUser();
+    },
+    recommend(skill) {
+      const formData = new FormData();
+      formData.append('skill_id', skill.id);
+      this.$http.post(`api/users/${this.id}/recommenders`, formData).then((response) => {
+        this.skillRecommenders = response.data;
+        // need to add disable state
+      }, (response) => {
+        // for error
+        this.skillRecommenders = response.data;
+      });
     },
   },
   watch: {

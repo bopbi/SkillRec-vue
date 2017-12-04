@@ -2,7 +2,8 @@
   <div class="container">
     <div class="columns">
       <div class="column">
-        <h1 class="title is-1">{{ msg }}</h1>
+        <br />
+        <h1 class="title is-3">{{ msg }}</h1>
         <ul class="users-list">
           <li v-for="user in users"
             class="user subtitle is-3" :key="user.id">

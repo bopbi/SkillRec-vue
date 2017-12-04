@@ -2,7 +2,8 @@
   <div class="container">
     <div class="columns">
       <div class="column">
-        <h1 class="title is-1">{{ skill.name }}</h1>
+        <br />
+        <h1 class="title is-3">{{ skill.name }}</h1>
         <hr />
         <h3>User with {{ skill.name }} skill:</h3>
         <ul class="users-list subtitle is-3">

@@ -6,6 +6,7 @@ import UserDetail from '@/components/UserDetail';
 import Skills from '@/components/Skills';
 import SkillDetail from '@/components/SkillDetail';
 import Login from '@/components/Login';
+import Signup from '@/components/Signup';
 
 Vue.use(Router);
 Vue.use(VueResource);
@@ -46,6 +47,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+    },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: Signup,
     },
   ],
 });

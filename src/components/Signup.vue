@@ -2,23 +2,16 @@
   <div class="container">
     <div class="columns">
       <div class="column">
-        <form @submit.prevent="doLogin">
         <br />
         <h1 class="title is-3">{{ msg }}</h1>
-        <div class="field">
-          <label class="label">Name</label>
-          <input 
-              type="text"
-              data-id="user.name" 
-              placeholder="Enter your email"
-              v-model="credentials.email"
-              class="input is-2">
-        </div>
+        <form @submit.prevent="createUser">
+        <br />
+        <h1 class="title is-3">{{ msg }}</h1>
         <div class="field">
           <label class="label">Email</label>
           <input 
               type="text"
-              data-id="user.email" 
+              data-id="login.email" 
               placeholder="Enter your email"
               v-model="credentials.email"
               class="input is-2">
@@ -28,13 +21,15 @@
           <input
               type="password"
               placeholder="Enter your password"
-              v-model="user.password"
+              v-model="credentials.password"
               class="input">
         </div>
         <br />
         <button type="submit"
-        class="button is-link">Sign up</button>
-        </form>
+        class="button is-link">Login</button>
+        <br />
+        Don’t have an account? &nbsp;<a href="#">Sign up here.</a>
+        </form>   
       </div>
     </div>
   </div>
@@ -42,19 +37,23 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'Sign up',
   data() {
     return {
-      msg: 'Please Login',
-      user: {
-        email: '',
-        password: '',
-      },
-      loggingIn: false,
-      errors: {},
+      msg: 'User List',
+      users: [],
     };
   },
   methods: {
+    createUser() {
+      const formData = new FormData();
+      formData.append('name', this.credentials.name);
+      formData.append('email', this.credentials.email);
+      formData.append('password', this.credentials.password);
+      this.$http.post('api/users', formData).then((response) => {
+        doLogin();
+      });
+    },
     doLogin() {
       // this.$store.commit('setToken', this.credentials.email);
       // this.loggingIn = true;
@@ -63,7 +62,6 @@ export default {
       formData.append('password', this.credentials.password);
 
       this.$http.post('api/login', formData).then((response) => {
-        this.loggingIn = true;
         this.$store.commit('setToken', response.data.token);
         this.$router.push({ name: 'Home' });
       });
